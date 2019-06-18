@@ -45,7 +45,7 @@ public class StudentController
 
     @ApiOperation(value = "Retrieves a student associated with the StudentId", response = Student.class)
     @ApiResponses(value =  {
-            @ApiResponse(code = 201, message = "Student Found", response = Student.class),
+            @ApiResponse(code = 200, message = "Student Found", response = Student.class),
             @ApiResponse(code = 404, message = "Student Not Found", response = ErrorDetail.class)
 
     })
@@ -59,6 +59,16 @@ public class StudentController
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "return all students with the name like entered data", response = Student.class, responseContainer = "List")
+    @ApiImplicitParams({
+                               @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
+                                                 value = "Results page you want to retrieve (0..N)"),
+                               @ApiImplicitParam(name = "size", dataType = "integer", paramType = "query",
+                                                 value = "Number of records per page."),
+                               @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query",
+                                                 value = "Sorting criteria in the format: property(,asc|desc). " +
+                                                         "Default sort order is ascending. " +
+                                                         "Multiple sort criteria are supported.")})
 
     @GetMapping(value = "/student/namelike/{name}",
                 produces = {"application/json"})
@@ -69,6 +79,11 @@ public class StudentController
         return new ResponseEntity<>(myStudents, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Creates a new Student.", notes = "The newly created student id will be sent in the location header.", response = void.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Student Created Successfully", response = void.class),
+            @ApiResponse(code = 500, message = "Error creating student", response = ErrorDetail.class)
+    } )
 
     @PostMapping(value = "/Student",
                  consumes = {"application/json"},
@@ -87,6 +102,11 @@ public class StudentController
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "Updates Student information.", notes = "The updated information will be displayed on the database.", response = void.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Student Updated Successfully", response = void.class),
+            @ApiResponse(code = 404, message = "Error updating student", response = ErrorDetail.class)
+    } )
 
     @PutMapping(value = "/Student/{Studentid}")
     public ResponseEntity<?> updateStudent(
@@ -99,6 +119,11 @@ public class StudentController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Deletes a Student.", notes = "The student will be deleted from the database.", response = void.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Student Deleted Successfully", response = void.class),
+            @ApiResponse(code = 404, message = "Error deleting student", response = ErrorDetail.class)
+    } )
 
     @DeleteMapping("/Student/{Studentid}")
     public ResponseEntity<?> deleteStudentById(
