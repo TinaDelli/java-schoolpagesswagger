@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-
+@EnableWebMvc
 @EnableJpaAuditing
 @SpringBootApplication
 public class SchoolApplication
@@ -15,8 +15,10 @@ public class SchoolApplication
 
     public static void main(String[] args)
     {
-      SpringApplication.run(SchoolApplication.class, args);
+      ApplicationContext ctx = SpringApplication.run(SchoolApplication.class, args);
 
+        DispatcherServlet dispatcherServlet = (DispatcherServlet)ctx.getBean("dispatcherServlet");
+        dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
     }
 
 }
