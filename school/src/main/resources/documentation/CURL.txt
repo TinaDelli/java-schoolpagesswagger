@@ -1,0 +1,19 @@
+curl -X POST --user "lambda-client:lambda-secret" -d "grant_type=password&username=barnbarn&password=ILuvM4th!" cdelli-schoolpages.herokuapp.com/oauth/token
+
+curl -X GET -H "Accept : application/json" -H "Authorization: Bearer b3b006ae-7e8b-47ce-977f-dbf068d13a76"  https://cdelli-schoolpages.herokuapp.com/courses/courses
+
+curl -X GET -H "Accept : application/json" -H "Authorization: Bearer b3b006ae-7e8b-47ce-977f-dbf068d13a76"  https://cdelli-schoolpages.herokuapp.com/courses/studcount
+
+curl -X DELETE -H "Authorization: Bearer b3b006ae-7e8b-47ce-977f-dbf068d13a76" https://cdelli-schoolpages.herokuapp.com/courses/6
+
+curl -X GET -H "Accept : application/json" -H "Authorization: Bearer b3b006ae-7e8b-47ce-977f-dbf068d13a76"  https://cdelli-schoolpages.herokuapp.com/students/students
+
+curl -X GET -H "Accept : application/json" -H "Authorization: Bearer b3b006ae-7e8b-47ce-977f-dbf068d13a76"  https://cdelli-schoolpages.herokuapp.com/students/Student/1
+
+curl -X GET -H "Accept : application/json" -H "Authorization: Bearer b3b006ae-7e8b-47ce-977f-dbf068d13a76"  https://cdelli-schoolpages.herokuapp.com/students/student/namelike/j
+
+curl -POST -H "Content-Type: application/json" -d "{\"studname\": \"Spongebob\"}" https://cdelli-schoolpages.herokuapp.com/students/Student
+
+curl -X DELETE -H "Authorization: Bearer b3b006ae-7e8b-47ce-977f-dbf068d13a76" https://cdelli-schoolpages.herokuapp.com/students/Student/27
+
+curl -X PUT -H "Content-Type: application/json" -d "{\"studname\": \"Patricia\"}" https://cdelli-schoolpages.herokuapp.com/students/Student/29
